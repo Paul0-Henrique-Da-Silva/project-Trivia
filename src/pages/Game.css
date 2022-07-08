@@ -1,7 +1,44 @@
+button {
+  width: auto;
+  height: auto;
+  font-size: 40px;
+  border-radius: 7px;
+  padding: 14px;
+  box-shadow: 15px 10px 25px rgb(0, 0, 0),
+  inset -5px -5px 15px rgba(0,0,0,0.75);
+ 
+}
+
 .border-green {
   border: 3px solid rgb(6, 240, 15);
+  border-radius: 7px;
+  color: white;
 }
 
 .border-red {
   border: 3px solid red;
+  border-radius: 7px;
+  color: white;
+}
+.container-question {
+   height: 240px;
+}
+
+.question-text {
+  background-color: rgba(128, 128, 128, 0.447);
+  color: white;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.title-question {
+  color: rgb(87, 34, 193);
+  background-color: rgba(255, 255, 255, 0.589);
+  border-radius: 9px;
+}
+
+.answer-options {
+  margin: 15px;
+  display: flex;
+  justify-content: space-around;
 }

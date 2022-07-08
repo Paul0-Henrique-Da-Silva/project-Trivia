@@ -1,0 +1,39 @@
+/* .ranking {
+    display: flex;
+
+} */
+.container {
+    background-color: rgba(128, 128, 128, 0.447);
+    border-radius: 20px;
+    width: 1500px;
+}
+
+div > h1 {
+    background-color: rgba(66, 63, 63, 0.459);
+    border-radius: 15px;
+    width: auto;
+    padding: 4px;
+    position: center;
+}
+
+.clasificacao {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clasificacao > img {
+    height: 100px;
+    width: 100px;
+    margin: 4px;
+}
+
+p {
+    padding: 20px;
+}
+
+.score {
+    border-radius: 10px;
+    background-color: rgba(64, 10, 114, 0.71);
+}

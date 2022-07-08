@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { playerInfoAction } from '../action';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -39,28 +40,32 @@ class Login extends React.Component {
     return (
       <div>
         <form onSubmit={ this.startTheGame }>
-          <label htmlFor="name">
-            Name:
-            <input
-              type="text"
-              id="name"
-              onChange={ this.handleChange }
-              value={ name }
-              data-testid="input-player-name"
-            />
-          </label>
+          <div className="input-space">
+            <label htmlFor="name">
+              Name:
+              <input
+                type="text"
+                id="name"
+                onChange={ this.handleChange }
+                value={ name }
+                data-testid="input-player-name"
+              />
+            </label>
+            <br />
 
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              id="email"
-              onChange={ this.handleChange }
-              value={ email }
-              data-testid="input-gravatar-email"
-            />
-          </label>
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                id="email"
+                onChange={ this.handleChange }
+                value={ email }
+                data-testid="input-gravatar-email"
+              />
+            </label>
+          </div>
           <button
+            className="play-game"
             type="submit"
             data-testid="btn-play"
             disabled={ isDisabled }
@@ -68,6 +73,7 @@ class Login extends React.Component {
             Play
           </button>
           <Link
+            className="settings"
             to="/settings"
           >
             <button type="button" data-testid="btn-settings">Settings</button>

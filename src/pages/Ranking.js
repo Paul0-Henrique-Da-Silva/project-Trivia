@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { playAgainAction } from '../action';
+import './Ranking.css';
 
 class Ranking extends React.Component {
   state = {
@@ -24,15 +25,17 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
 
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
-        {ranking.map((player, index) => (
-          <div key={ index }>
-            <img src={ player.picture } alt="Player" />
-            <p data-testid={ `player-name-${index}` }>{player.name}</p>
-            <p data-testid={ `player-score-${index}` }>{player.score}</p>
-          </div>
-        ))}
+      <div className="container">
+        <div className="ranking">
+          <h1 data-testid="ranking-title">Ranking</h1>
+          {ranking.map((player, index) => (
+            <div className="clasificacao" key={ index }>
+              <img src={ player.picture } alt="Player" />
+              <p data-testid={ `player-name-${index}` }>{player.name}</p>
+              <p className="score" data-testid={ `player-score-${index}` }>{player.score}</p>
+            </div>
+          ))}
+        </div>
         <button
           type="button"
           onClick={ this.goHome }
@@ -41,6 +44,7 @@ class Ranking extends React.Component {
           Voltar inicio
         </button>
       </div>
+
     );
   }
 }

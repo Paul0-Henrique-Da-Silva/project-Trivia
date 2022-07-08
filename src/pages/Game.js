@@ -22,19 +22,20 @@ class Game extends React.Component {
 
   async componentDidMount() {
     const token = localStorage.getItem('token');
-    // if (token !== null) {
-    const gameResponse = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-    const gameData = await gameResponse.json();
-    if (gameData.response_code === RESPONSE_CODE) {
-      const { history } = this.props;
-      localStorage.setItem('token', '');
-      history.push('/');
-    } else {
-      this.setState({
-        questions: gameData.results,
-        answers: this.handleAnswers(gameData.results) }, this.handleTimer);
+    if (token !== null) {
+      const gameResponse = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+      const gameData = await gameResponse.json();
+      console.log(gameData);
+      if (gameData.response_code === RESPONSE_CODE) {
+        const { history } = this.props;
+        localStorage.setItem('token', '');
+        history.push('/');
+      } else {
+        this.setState({
+          questions: gameData.results,
+          answers: this.handleAnswers(gameData.results) }, this.handleTimer);
+      }
     }
-    // }
   }
 
   componentDidUpdate() {
@@ -85,20 +86,9 @@ class Game extends React.Component {
       history.push('/feedback');
     }
     clearInterval(this.idTimer);
-
-    // this.setState((prev) => ({
-    //   questionNumber: prev.questionNumber === prev
-    //     .questions.length - 1 ? prev.questionNumber : prev.questionNumber + 1,
-    //   buttonColor: false,
-    // }), () => this.setState({
-    //   answers: this.handleAnswers(questions),
-    //   btnHidden: false,
-    //   timer: 30,
-    //   isDisabled: false,
-    // }, this.handleTimer));
-
     this.setState((prev) => ({
-      questionNumber: prev.questionNumber + 1,
+      questionNumber: prev.questionNumber === prev
+        .questions.length - 1 ? prev.questionNumber : prev.questionNumber + 1,
       buttonColor: false,
     }), () => this.setState({
       answers: this.handleAnswers(questions),
@@ -119,8 +109,8 @@ class Game extends React.Component {
   handleButtonStyle = (answer) => {
     const { buttonColor } = this.state;
     if (buttonColor) {
-      if (answer === 'correct-answer') return 'border-green';
-      return 'border-red';
+      if (answer === 'correct-answer') return 'border-green border-all';
+      return 'border-red border-all';
     }
     return null;
   }
@@ -133,35 +123,37 @@ class Game extends React.Component {
       <div>
         <Header />
         <h3>{timer}</h3>
-        <h2 data-testid="question-category">
-          {questions.length !== 0 && questions[questionNumber].category}
-        </h2>
-        <h4 data-testid="question-text">
-          {questions.length !== 0 && questions[questionNumber].question}
-        </h4>
-        <div data-testid="answer-options">
-          {answers.map((answerObj, index) => (
-            <button
-              key={ index }
-              type="button"
-              className={ this.handleButtonStyle(answerObj.testId) }
-              data-testid={ answerObj.testId }
-              onClick={ () => this.handleClick(answerObj) }
-              disabled={ isDisabled }
-            >
-              {answerObj.answer}
-            </button>
-          ))}
-        </div>
-        <div>
-          {btnHidden && (
-            <button
-              type="submit"
-              onClick={ this.handleClickNext }
-              data-testid="btn-next"
-            >
-              Next
-            </button>)}
+        <div className="container-question">
+          <h2 data-testid="question-category" className="title-question">
+            {questions.length !== 0 && questions[questionNumber].category}
+          </h2>
+          <h4 data-testid="question-text" className="question-text">
+            {questions.length !== 0 && questions[questionNumber].question}
+          </h4>
+          <div data-testid="answer-options" className="answer-options">
+            {answers.map((answerObj, index) => (
+              <button
+                key={ index }
+                type="button"
+                className={ this.handleButtonStyle(answerObj.testId) }
+                data-testid={ answerObj.testId }
+                onClick={ () => this.handleClick(answerObj) }
+                disabled={ isDisabled }
+              >
+                {answerObj.answer}
+              </button>
+            ))}
+          </div>
+          <div>
+            {btnHidden && (
+              <button
+                type="submit"
+                onClick={ this.handleClickNext }
+                data-testid="btn-next"
+              >
+                Next
+              </button>)}
+          </div>
         </div>
       </div>
     );
