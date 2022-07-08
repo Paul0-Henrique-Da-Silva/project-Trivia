@@ -9,7 +9,7 @@ body {
 }
 
 .App-logo {
-  height: 15vmin;
+  height: 200px;
   pointer-events: none;
 }
 
@@ -30,7 +30,7 @@ body {
 
 .App-header {
   align-items: center;
-  background-color: #282c34;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(195, 20, 50), rgb(36, 11, 54)) repeat scroll 0% 0%;
   color: white;
   display: flex;
   flex-direction: column;
